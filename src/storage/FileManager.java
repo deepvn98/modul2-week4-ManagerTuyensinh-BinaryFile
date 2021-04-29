@@ -6,6 +6,20 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FileManager {
+    private String name;
+    private static FileManager INTANCE;
+
+    public FileManager(String name) {
+        this.name = name;
+    }
+
+    public static FileManager getINTANCE(String name){
+        if (INTANCE == null){
+            INTANCE = new FileManager(name);
+        }return INTANCE;
+    }
+
+
 
     public static void writerFile(ArrayList<SinhVien> sinhViens) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("sinhvien.txt");
@@ -16,7 +30,6 @@ public class FileManager {
     }
 
     public static ArrayList<SinhVien> readerFile() throws IOException, ClassNotFoundException {
-        ArrayList<SinhVien> sinhViens = new ArrayList<>();
         File file = new File("sinhvien.txt");
         if (!file.exists()){
             file.createNewFile();
@@ -24,11 +37,13 @@ public class FileManager {
         if (file.length()>0){
             FileInputStream fileInputStream = new FileInputStream(file);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            sinhViens = (ArrayList<SinhVien>)objectInputStream.readObject();
+            ArrayList<SinhVien>sinhViens = (ArrayList<SinhVien>)objectInputStream.readObject();
+
             objectInputStream.close();
             fileInputStream.close();
+            return sinhViens;
         }
-        return sinhViens;
+        return new ArrayList<>();
 
     }
 }

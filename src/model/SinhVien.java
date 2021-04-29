@@ -1,8 +1,10 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class SinhVien implements Serializable {
+    private static final long serialVersionUID =1L;
     private String id;
     private String name;
     private int age;
@@ -66,7 +68,18 @@ public class SinhVien implements Serializable {
     public void setKhoiThi(KhoiThi khoiThi) {
         this.khoiThi = khoiThi;
     }
-//    public void show(){
-//        System.out.printf("\n\t\t%-20s %-20s %-10d %-20s %-20s",id,name,age,address,khoiThi);
+    public void show(){
+        System.out.printf("\n\t\t%-20s %-20s %-10d %-20s %-20s",id,name,age,address,khoiThi);
+    }
+
+//    @Override
+//    public String toString() {
+//        return "SinhVien{" +
+//                "id='" + id + '\'' +
+//                ", name='" + name + '\'' +
+//                ", age=" + age +
+//                ", address='" + address + '\'' +
+//                ", khoiThi=" + khoiThi +
+//                '}';
 //    }
 }

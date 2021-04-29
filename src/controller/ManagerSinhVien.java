@@ -19,19 +19,19 @@ public class ManagerSinhVien {
     }
     public void addSinhVien(SinhVien sinhVien) throws IOException {
         sinhViens.add(sinhVien);
-        FileManager.writerFile(sinhViens);
+        FileManager fileManager = FileManager.getINTANCE("Sang");
+        fileManager.writerFile(sinhViens);
 
     }
-    public void editSinhVien(SinhVien sinhVien,int index){
+    public void editSinhVien(int index, SinhVien sinhVien) throws IOException {
         sinhViens.set(index,sinhVien);
-    }
-    public void deleteSinhVien(int index,SinhVien sinhVien) throws IOException {
-        sinhViens.set(index,sinhVien);
-        FileManager.writerFile(sinhViens);
+        FileManager fileManager = FileManager.getINTANCE("Sang");
+        fileManager.writerFile(sinhViens);
     }
     public void deleteSinhVien(int index) throws IOException {
         sinhViens.remove(index);
-        FileManager.writerFile(sinhViens);
+        FileManager fileManager = FileManager.getINTANCE("Sang");
+        fileManager.writerFile(sinhViens);
     }
 
     public String getName() {
@@ -45,22 +45,25 @@ public class ManagerSinhVien {
     public ArrayList<SinhVien> getSinhViens() {
         return sinhViens;
     }
+//    Tìm kiếm sinh viên
+    public SinhVien getSinhvienById(String name){
+        SinhVien v1 = null;
+        for (int i = 0; i < sinhViens.size(); i++){
+            if (name.equalsIgnoreCase(sinhViens.get(i).getName())){
+                v1= sinhViens.get(i);
+                break;}
+        }
+        return v1;
+    }
 
     public void setSinhViens(ArrayList<SinhVien> sinhViens) {
         this.sinhViens = sinhViens;
     }
-//    public void showInfor(){
-//        for (SinhVien s:sinhViens
-//             ) {
-//            System.out.println(s);
-//        }
-//    }
 
     public void showInfor(){
-//        System.out.printf("\n\t\t%-20s %-20s %-20s %-20s %-20s","ID","Name","Age","Address","ExamBlock");
+        System.out.printf("\n\t\t%-20s %-20s %-10s %-20s %-20s","ID","Name","Age","Address","ExamBlock");
         for (int i = 0 ; i < sinhViens.size(); i ++){
-//            sinhViens.get(i).show();
-            System.out.println(sinhViens.get(i));
+            sinhViens.get(i).show();
 
         }
     }

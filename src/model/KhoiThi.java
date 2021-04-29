@@ -17,6 +17,9 @@ public class KhoiThi implements Serializable {
         this.subject2 = subject2;
         this.subject3 = subject3;
     }
+    public void showsubject(){
+        System.out.printf("\n%-10s %-10s %-10s %-10s", name,subject1,subject2,subject3);
+    }
 
     public String getName() {
         return name;
@@ -48,5 +51,15 @@ public class KhoiThi implements Serializable {
 
     public void setSubject3(String subject3) {
         this.subject3 = subject3;
+    }
+
+    @Override
+    public String toString() {
+        return
+                 name ;
+//                ", subject1='" + subject1 + '\'' +
+//                ", subject2='" + subject2 + '\'' +
+//                ", subject3='" + subject3 + '\'' +
+//                '}';
     }
 }

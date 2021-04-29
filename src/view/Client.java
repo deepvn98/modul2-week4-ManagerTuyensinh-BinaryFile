@@ -4,6 +4,7 @@ import controller.ManagerSinhVien;
 import model.KhoiThi;
 import model.SinhVien;
 import storage.FileManager;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class Client {
     public static KhoiThi khoiA = new KhoiThi("Khối A","Toán","Lý","Hoá");
     public static KhoiThi khoiB = new KhoiThi("Khối B","Toán","Anh","Văn");
     public static KhoiThi khoiC = new KhoiThi("Khối C","Sinh","Sử","Địa");
+
     public static void main(String[] args) {
         ArrayList<SinhVien> sinhViens = null;
         try {
@@ -21,18 +23,68 @@ public class Client {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        final ManagerSinhVien manager = new ManagerSinhVien("Nguyen Sang",sinhViens);
 //Them sinh vien va doc vao file
-        ManagerSinhVien manager = new ManagerSinhVien("Nguyen Sang",sinhViens);
-        SinhVien sinhVien = newSinhVien();
-        try {
-            manager.addSinhVien(sinhVien);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        manager.showInfor();
-
+//        SinhVien sinhVien = newSinhVien();
+//        try {
+//            manager.addSinhVien(sinhVien);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        manager.showInfor();
+        menuManagerSinhVien(manager);
 
     }
+    public static void menuManagerSinhVien(ManagerSinhVien managerSinhVien){
+        boolean choice = true;
+        int number = 0;
+        int[] arr;
+        displayMenu.displayMenu();
+        Scanner scanner = new Scanner(System.in);
+        do {
+            System.out.println();
+            System.out.print("Nhập vào lựa chọn của bạn: ");
+            int enter = scanner.nextInt();
+            switch (enter){
+                case 1:
+                {
+                    System.out.print("Số lượng sinh viên muốn thêm: ");
+                    number = scanner.nextInt();
+                    arr=new  int[number];
+                    for (int i = 0; i< arr.length; i++){
+                        System.out.println("Sinh viên "+(i+1));
+                        SinhVien sinhVien = newSinhVien();
+                        try {
+                            managerSinhVien.addSinhVien(sinhVien);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    break;
+                }
+                case 3:
+                {
+
+                }
+                case 4:
+                {
+                    managerSinhVien.showInfor();
+                    break;
+                }
+                case 5:
+                {
+                    choice=false;
+                    break;
+                }
+            }
+        }while (choice);
+
+    }
+//  THEM SINH VIEN
     public static SinhVien newSinhVien(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter id :");
@@ -69,5 +121,15 @@ public class Client {
         }
         return sinhVien;
     }
+//    SUA THONG TIN SINH VIEN
+    public void editInforSinhVien(ArrayList<SinhVien>sinhViens){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Tìm kiếm theo ID sinh viên: ");
+        String id = scanner.nextLine();
+        for (int i = 0; i< sinhViens.size(); i++){
+            if (id.equalsIgnoreCase(sinhViens.get(i).getId())){
 
+            }
+        }
+    }
 }
